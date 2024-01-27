@@ -10,14 +10,11 @@
 
 int main()
 {
-#ifndef PICO_DEFAULT_LED_PIN
-#warning blink example requires a board with a regular LED
-#else
-    const uint LED_PIN = 18; /* PICO_DEFAULT_LED_PIN; */
-    const uint LED_2 = LED_PIN + 1;
-    const uint LED_3 = LED_PIN + 2;
-    gpio_init(LED_PIN);
-    gpio_set_dir(LED_PIN, GPIO_OUT);
+    const uint LED_1 = 18; 
+    const uint LED_2 = LED_1 + 1;
+    const uint LED_3 = LED_1 + 2;
+    gpio_init(LED_1);
+    gpio_set_dir(LED_1, GPIO_OUT);
     gpio_init(LED_2);
     gpio_set_dir(LED_2, GPIO_OUT);
     gpio_init(LED_3);
@@ -26,13 +23,11 @@ int main()
     uint count = 0;
     while (true)
     {
-        uint pin = LED_PIN + (++count) % 3;
+        uint pin = LED_1 + (++count) % 3;
         gpio_put(pin, 1);
         sleep_ms(250);
         gpio_put(pin, 0);
         sleep_ms(250);
-        if (pin == LED_PIN)
-            printf("Hello, world! %d pin=%d\n", count, pin);
+        printf("Hello, world! %d pin=%d\n", count, pin);
     }
-#endif
 }
